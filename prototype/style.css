@@ -1,0 +1,98 @@
+@font-face
+{
+    font-family: 'chalk';
+    src: url(MrChalk.otf);
+    font-style: normal;
+    font-weight: 100;
+}
+
+body
+{
+    background-image: url("bg.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-attachment:fixed;
+    font-family: Consolas,monaco,monospace;
+    color: white;
+    font-family: chalk;
+
+}
+
+header 
+{
+    width: 60%;
+    height: auto;
+    margin-left: 20%;
+}
+
+img
+{
+    margin-left: 3%;
+}
+
+#book_gif
+{
+    height:15%;
+    width:25%;
+
+}
+
+main 
+{
+    width: 60%;
+    height: auto;
+    margin-left: 20%;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 25px;
+}
+
+form 
+{
+    margin-left: 30%;
+    margin-bottom: 5%;
+}
+
+footer 
+{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: dimgray;
+    border-radius: 25px;
+}
+
+h1, h3, h4, a
+{
+    margin-left: 3%;
+}
+
+table
+{
+    margin-left: 12.5%;
+    border-radius: 25px;
+}
+
+.menu_icon
+{
+    width: 128px;
+    height: 128px;
+}
+
+.my_stuff
+{
+    font-size: 32px;
+    margin-left: 5%;
+}
+
+p
+{
+    margin-left: 3%;
+}
+
+hr
+{
+    border-color: white;
+    border-width: 2px;
+}
