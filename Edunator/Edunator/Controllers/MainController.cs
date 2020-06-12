@@ -158,6 +158,10 @@ namespace Edunator.Controllers
         {
             _Class _class = Context._Classes.Single(c => c.Id == _classId);
             List<Student> students = Context.Students.Where(s => s.FirstName == fname).ToList();
+
+            if (students.Count == 0)
+                return Content("Invalid student.");
+
             Student student = students.First(s => s.LastName == lname);
 
             if ( student != null)
@@ -180,6 +184,28 @@ namespace Edunator.Controllers
             }
             else
                 return Content("Invalid student.");
+        }
+
+        public ActionResult RemoveStudentFromClass(int studentId)
+        {
+            Student studentToRemove = Context.Students.Single(s => s.Id == studentId);
+            _Class _class = Context._Classes.Single(c => c.Id == studentToRemove._ClassId);
+
+            studentToRemove._ClassId = 0;
+            Context.SaveChanges();
+
+            Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+
+            EditClassViewModel ecvm = new EditClassViewModel
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                ClassId = _class.Id,
+                ClassName = _class.Name,
+                Students = Context.Students.Where(s => s._ClassId == _class.Id).ToList()
+            };
+
+            return View("EditClass", ecvm);
         }
     }
 }
