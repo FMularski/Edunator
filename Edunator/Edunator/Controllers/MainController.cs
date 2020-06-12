@@ -257,5 +257,54 @@ namespace Edunator.Controllers
 
             return View("EditClass", ecvm);
         }
+
+        public ActionResult ManageSubjects()
+        {
+            Teacher teacher = Context.Teachers.SingleOrDefault(t => t.Email == Email);
+
+            ManageSubjectsViewModel msvm = new ManageSubjectsViewModel
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                Subjects = Context.Subjects.ToList()
+            };
+
+            return View("ManageSubjects_Teacher", msvm);
+        }
+
+        [HttpGet]
+        public ActionResult AddSubject()
+        {
+            Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+
+            MainViewModel mvm = new MainViewModel { FirstName = teacher.FirstName, LastName = teacher.LastName };
+            return View("AddSubject", mvm);
+        }
+
+        [HttpPost]
+        public ActionResult AddSubject(string name, string forclass)
+        {
+            Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+            _Class _class = Context._Classes.SingleOrDefault(c => c.Name == forclass);
+
+            if (_class == null)
+                return Content("Invalid class.");
+
+
+            Subject newSubject = new Subject { Name = name, _ClassId = _class.Id, TeacherId = teacher.Id };
+
+            Context.Subjects.Add(newSubject);
+            Context.SaveChanges();
+
+            
+            ManageSubjectsViewModel msvm = new ManageSubjectsViewModel
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                Subjects = Context.Subjects.ToList()
+            };
+
+            return View("ManageSubjects_Teacher", msvm);
+        }
     }
 }

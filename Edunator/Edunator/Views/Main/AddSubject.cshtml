@@ -24,20 +24,24 @@
     <main>
         <br />
         <h3>Logged in as @Model.FirstName @Model.LastName</h3>
-        <br /><br />
-        <table class="w-75">
-            <tbody>
-                <tr>
-                    <td><a href="@Url.Action("MyProfile", "Main")"><img class="menu_icon" src="~/Content/img/profile.png" /></a> <span class="my_stuff">My profile</span></td>
-                    <td><a href="@Url.Action("ManageClasses","Main")"><img class="menu_icon" src="~/Content/img/class.png" /></a> <span class="my_stuff">Manage classes</span></td>
-                </tr>
-                <tr>
-                    <td><a href="@Url.Action("ManageSubjects", "Main")"><img class="menu_icon" src="~/Content/img/subjects.png" /></a> <span class="my_stuff">Manage subjects</span></td>
-                    <td><a href="#"><img class="menu_icon" src="~/Content/img/lesson.png" /></a> <span class="my_stuff">Manage lessons</span></td>
-                </tr>
-            </tbody>
-        </table>
+
+        <form action="@Url.Action("AddSubject","Main")" , method="post">
+            <br />
+            <h2>Add subject</h2>
+            <div class="form-group">
+                <label>Subject name:</label>
+                <input name="name" class="form-control w-50" required>
+            </div><br />
+            <div class="form-group">
+                <label>For class:</label>
+                <input name="forclass" class="form-control w-50" required>
+            </div><br />
+            <button type="submit" class="btn btn-outline-dark w-50">Add</button>
+        </form>
+
         <br /><br /><br />
+        <a href="@Url.Action("BackToMain", "Main")" class="btn btn-outline-dark"><< Back</a>
+        <br /><br />
     </main>
 
     <footer>
