@@ -94,5 +94,46 @@ namespace Edunator.Controllers
                 return View("Main_Student", mvm);
             }
         }
+
+        public ActionResult ManageClasses()
+        {
+            Teacher teacher = Context.Teachers.SingleOrDefault(t => t.Email == Email);
+
+            ManageClassesViewModel mcvm = new ManageClassesViewModel
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                _Classes = Context._Classes.ToList()
+            };
+
+            return View("ManageClasses_Teacher", mcvm);
+        }
+
+        [HttpGet]
+        public ActionResult AddClass()
+        {
+            Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+
+            MainViewModel mvm = new MainViewModel { FirstName = teacher.FirstName, LastName = teacher.LastName };
+            return View("AddClass", mvm);
+        }
+
+        [HttpPost]
+        public ActionResult AddClass(string name)
+        {
+            _Class newClass = new _Class { Name = name };
+            Context._Classes.Add(newClass);
+            Context.SaveChanges();
+
+            Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+            ManageClassesViewModel mcvm = new ManageClassesViewModel
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                _Classes = Context._Classes.ToList()
+            };
+
+            return View("ManageClasses_Teacher", mcvm);
+        }
     }
 }
