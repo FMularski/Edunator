@@ -14,6 +14,5 @@ namespace Edunator
         public string Email { get; set; }
         public string Password { get; set; }
         public int _ClassId { get; set; }
-        public List<int> GradesId { get; set; }
     }
 }

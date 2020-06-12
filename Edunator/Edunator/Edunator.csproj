@@ -142,8 +142,13 @@
     <Compile Include="Migrations\202006121050500_RenameLoginToSchoolInStudentAndTeacherTables.Designer.cs">
       <DependentUpon>202006121050500_RenameLoginToSchoolInStudentAndTeacherTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006122004233_RemoveGradesIdsFromStudent.cs" />
+    <Compile Include="Migrations\202006122004233_RemoveGradesIdsFromStudent.Designer.cs">
+      <DependentUpon>202006122004233_RemoveGradesIdsFromStudent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EditClassViewModel.cs" />
+    <Compile Include="Models\GiveGradeViewModel.cs" />
     <Compile Include="Models\MainViewModel.cs" />
     <Compile Include="Models\ManageClassesViewModel.cs" />
     <Compile Include="Models\MyProfileViewModel.cs" />
@@ -205,6 +210,7 @@
     <Content Include="Views\Main\ManageClasses_Teacher.cshtml" />
     <Content Include="Views\Main\AddClass.cshtml" />
     <Content Include="Views\Main\EditClass.cshtml" />
+    <Content Include="Views\Main\GiveGrade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -228,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006121050500_RenameLoginToSchoolInStudentAndTeacherTables.resx">
       <DependentUpon>202006121050500_RenameLoginToSchoolInStudentAndTeacherTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006122004233_RemoveGradesIdsFromStudent.resx">
+      <DependentUpon>202006122004233_RemoveGradesIdsFromStudent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

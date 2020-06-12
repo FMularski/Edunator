@@ -207,5 +207,55 @@ namespace Edunator.Controllers
 
             return View("EditClass", ecvm);
         }
+
+        [HttpGet]
+        public ActionResult GiveGrade(int studentId)
+        {
+            Student student = Context.Students.Single(s => s.Id == studentId);
+            Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+
+            GiveGradeViewModel ggvm = new GiveGradeViewModel
+            {
+                FirstNameTeacher = teacher.FirstName,
+                LastNameTeacher = teacher.LastName,
+                FirstNameStudent = student.FirstName,
+                LastNameStudent = student.LastName,
+                StudentId = student.Id,
+                TeacherId = teacher.Id
+            };
+
+            return View("GiveGrade", ggvm);
+        }
+
+        [HttpPost]
+        public ActionResult GiveGrade(int studentId, int teacherId, int grade, string desc)
+        {
+            Grade _grade = new Grade
+            {
+                StudentId = studentId,
+                TeacherId = teacherId,
+                Value = grade,
+                Date = DateTime.Now.ToShortDateString(),
+                Description = desc
+            };
+
+            Context.Grades.Add(_grade);
+            Context.SaveChanges();
+
+            Student student = Context.Students.Single(s => s.Id == studentId);
+            _Class _class = Context._Classes.Single(c => c.Id == student._ClassId);
+            Teacher teacher = Context.Teachers.Single(t => t.Id == teacherId);
+
+            EditClassViewModel ecvm = new EditClassViewModel
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                ClassId = _class.Id,
+                ClassName = _class.Name,
+                Students = Context.Students.Where(s => s._ClassId == _class.Id).ToList()
+            };
+
+            return View("EditClass", ecvm);
+        }
     }
 }
