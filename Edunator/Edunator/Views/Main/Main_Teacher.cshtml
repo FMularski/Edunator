@@ -1,0 +1,53 @@
+﻿@using Edunator.Models
+@model Edunator.Models.MainViewModel
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="icon" href="~/Content/img/icon.png" />
+
+    <title>Edunator</title>
+</head>
+<body>
+    <header>
+        <img src="~/Content/img/edunator.png" />
+        <img id="book_gif" src="~/Content/img/book2.gif" />
+    </header>
+    <br />
+    <main>
+        <br />
+        <h3>Logged in as @Model.FirstName @Model.LastName</h3>
+        <br /><br />
+        <table class="w-75">
+            <tbody>
+                <tr>
+                    <td><a href="#"><img class="menu_icon" src="~/Content/img/profile.png" /></a> <span class="my_stuff">My profile</span></td>
+                    <td><a href="#"><img class="menu_icon" src="~/Content/img/class.png" /></a> <span class="my_stuff">Manage classes</span></td>
+                </tr>
+                <tr>
+                    <td><a href="#"><img class="menu_icon" src="~/Content/img/subjects.png" /></a> <span class="my_stuff">Manage subjects</span></td>
+                    <td><a href="#"><img class="menu_icon" src="~/Content/img/lesson.png" /></a> <span class="my_stuff">Manage lessons</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <br /><br /><br />
+    </main>
+
+    <footer>
+        Edunator 2020 &copy; All rights reserved
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
