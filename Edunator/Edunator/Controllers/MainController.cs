@@ -36,7 +36,7 @@ namespace Edunator.Controllers
                 MainViewModel mvm = new MainViewModel { FirstName = student.FirstName, LastName = student.LastName };
                 return View("Main_Student", mvm);
             }
-                
+
         }
 
         [HttpGet]
@@ -134,6 +134,52 @@ namespace Edunator.Controllers
             };
 
             return View("ManageClasses_Teacher", mcvm);
+        }
+
+        [HttpGet]
+        public ActionResult EditClass(int classId)
+        {
+            _Class classToEdit = Context._Classes.Single(c => c.Id == classId);
+            Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+
+            EditClassViewModel ecvm = new EditClassViewModel
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                ClassId = classToEdit.Id,
+                ClassName = classToEdit.Name,
+                Students = Context.Students.Where(s => s._ClassId == classId).ToList()
+            };
+
+            return View("EditClass", ecvm);
+        }
+
+        public ActionResult AddStudentToClass(int _classId, string fname, string lname)
+        {
+            _Class _class = Context._Classes.Single(c => c.Id == _classId);
+            List<Student> students = Context.Students.Where(s => s.FirstName == fname).ToList();
+            Student student = students.First(s => s.LastName == lname);
+
+            if ( student != null)
+            {
+                student._ClassId = _classId;
+                Context.SaveChanges();
+
+                Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+
+                EditClassViewModel ecvm = new EditClassViewModel
+                {
+                    FirstName = teacher.FirstName,
+                    LastName = teacher.LastName,
+                    ClassId = _class.Id,
+                    ClassName = _class.Name,
+                    Students = Context.Students.Where(s => s._ClassId == _classId).ToList()
+                };
+
+                return View("EditClass", ecvm);
+            }
+            else
+                return Content("Invalid student.");
         }
     }
 }
