@@ -38,5 +38,61 @@ namespace Edunator.Controllers
             }
                 
         }
+
+        [HttpGet]
+        public ActionResult MyProfile()
+        {
+            Teacher teacher = Context.Teachers.SingleOrDefault(t => t.Email == Email);
+            Student student = Context.Students.SingleOrDefault(s => s.Email == Email);
+
+            if (teacher != null)
+            {
+                MyProfileViewModel mpvm = new MyProfileViewModel
+                {
+                    FirstName = teacher.FirstName,
+                    LastName = teacher.LastName,
+                    Email = teacher.Email,
+                    School = teacher.School,
+                    Password = teacher.Password
+                };
+
+                return View("MyProfile_Teacher", mpvm);
+            }
+            else
+            {
+                MyProfileViewModel mpvm = new MyProfileViewModel
+                {
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    Email = student.Email,
+                    School = student.School,
+                    Password = student.Password
+                };
+
+                return View("MyProfile_Student", mpvm);
+            }
+        }
+
+        public ActionResult LogOut()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult BackToMain()
+        {
+            Teacher teacher = Context.Teachers.SingleOrDefault(t => t.Email == Email);
+            Student student = Context.Students.SingleOrDefault(s => s.Email == Email);
+
+            if (teacher != null)
+            {
+                MainViewModel mvm = new MainViewModel { FirstName = teacher.FirstName, LastName = teacher.LastName };
+                return View("Main_Teacher", mvm);
+            }
+            else
+            {
+                MainViewModel mvm = new MainViewModel { FirstName = student.FirstName, LastName = student.LastName };
+                return View("Main_Student", mvm);
+            }
+        }
     }
 }
