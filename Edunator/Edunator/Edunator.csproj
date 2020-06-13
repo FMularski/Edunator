@@ -147,10 +147,12 @@
       <DependentUpon>202006122004233_RemoveGradesIdsFromStudent.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AddLessonViewModel.cs" />
     <Compile Include="Models\EditClassViewModel.cs" />
     <Compile Include="Models\GiveGradeViewModel.cs" />
     <Compile Include="Models\MainViewModel.cs" />
     <Compile Include="Models\ManageClassesViewModel.cs" />
+    <Compile Include="Models\ManageLessonsViewModel.cs" />
     <Compile Include="Models\ManageSubjectsViewModel.cs" />
     <Compile Include="Models\MyProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -214,6 +216,8 @@
     <Content Include="Views\Main\GiveGrade.cshtml" />
     <Content Include="Views\Main\ManageSubjects_Teacher.cshtml" />
     <Content Include="Views\Main\AddSubject.cshtml" />
+    <Content Include="Views\Main\ManageLessons_Subjects.cshtml" />
+    <Content Include="Views\Main\AddLesson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

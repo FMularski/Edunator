@@ -164,7 +164,7 @@ namespace Edunator.Controllers
 
             Student student = students.First(s => s.LastName == lname);
 
-            if ( student != null)
+            if (student != null)
             {
                 student._ClassId = _classId;
                 Context.SaveChanges();
@@ -296,7 +296,7 @@ namespace Edunator.Controllers
             Context.Subjects.Add(newSubject);
             Context.SaveChanges();
 
-            
+
             ManageSubjectsViewModel msvm = new ManageSubjectsViewModel
             {
                 FirstName = teacher.FirstName,
@@ -305,6 +305,67 @@ namespace Edunator.Controllers
             };
 
             return View("ManageSubjects_Teacher", msvm);
+        }
+
+        public ActionResult ManageLessons()
+        {
+            Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+            ManageLessonsViewModel mlvm = new ManageLessonsViewModel
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                Subjects = Context.Subjects.Where(s => s.TeacherId == teacher.Id).ToList()
+            };
+
+            return View("ManageLessons_Subjects", mlvm);
+        }
+
+        [HttpGet]
+        public ActionResult AddLesson(int subjectId)
+        {
+            Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+            Subject subject = Context.Subjects.Single(s => s.Id == subjectId);
+
+            AddLessonViewModel alvm = new AddLessonViewModel
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                Subject = subject,
+                Lessons = Context.Lessons.Where(l => l.SubjectId == subject.Id).ToList()
+            };
+
+            return View("AddLesson", alvm);
+        }
+
+        [HttpPost]
+        public ActionResult AddLesson(int subjectId, string topic, string content, string imglink, string videolink, string extraslink)
+        {
+            Lesson newLesson = new Lesson
+            {
+                SubjectId = subjectId,
+                Topic = topic,
+                Content = content,
+                LinkToImg = imglink.Length > 0 ? imglink : null,
+                LinkToMovie = videolink.Length > 0 ? videolink : null,
+                LinkToExtras = extraslink.Length > 0 ? extraslink : null,
+                Date = DateTime.Now.ToShortDateString()
+            };
+
+            Context.Lessons.Add(newLesson);
+            Context.SaveChanges();
+
+            Teacher teacher = Context.Teachers.Single(t => t.Email == Email);
+            Subject subject = Context.Subjects.Single(s => s.Id == subjectId);
+
+            AddLessonViewModel alvm = new AddLessonViewModel
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                Subject = subject,
+                Lessons = Context.Lessons.Where(l => l.SubjectId == subject.Id).ToList()
+            };
+
+            return View("AddLesson", alvm);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@using Edunator.Models
-@model Edunator.Models.MainViewModel
+@model Edunator.Models.ManageLessonsViewModel
 
 <!doctype html>
 <html lang="en">
@@ -24,20 +24,17 @@
     <main>
         <br />
         <h3>Logged in as @Model.FirstName @Model.LastName</h3>
-        <br /><br />
-        <table class="w-75">
-            <tbody>
-                <tr>
-                    <td><a href="@Url.Action("MyProfile", "Main")"><img class="menu_icon" src="~/Content/img/profile.png" /></a> <span class="my_stuff">My profile</span></td>
-                    <td><a href="@Url.Action("ManageClasses","Main")"><img class="menu_icon" src="~/Content/img/class.png" /></a> <span class="my_stuff">Manage classes</span></td>
-                </tr>
-                <tr>
-                    <td><a href="@Url.Action("ManageSubjects", "Main")"><img class="menu_icon" src="~/Content/img/subjects.png" /></a> <span class="my_stuff">Manage subjects</span></td>
-                    <td><a href="@Url.Action("ManageLessons", "Main")"><img class="menu_icon" src="~/Content/img/lesson.png" /></a> <span class="my_stuff">Manage lessons</span></td>
-                </tr>
-            </tbody>
-        </table>
+        <h1>Manage lessons</h1>
+
+        @foreach (Subject subject in Model.Subjects)
+        {
+            <h4><a href="@Url.Action("AddLesson", "Main", new { subjectId = subject.Id})">@subject.Name</a></h4>
+        }
+
+
         <br /><br /><br />
+        <a href="@Url.Action("BackToMain", "Main")" class="btn btn-outline-dark"><< Back</a>
+        <br /><br />
     </main>
 
     <footer>
