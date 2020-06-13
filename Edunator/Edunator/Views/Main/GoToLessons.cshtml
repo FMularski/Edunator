@@ -1,5 +1,5 @@
 ﻿@using Edunator.Models
-@model Edunator.Models.MainViewModel
+@model Edunator.Models.AddLessonViewModel
 
 <!doctype html>
 <html lang="en">
@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/Content/bootstrap.css">
     <link rel="stylesheet" href="~/Content/Site.css" />
-    <link rel="icon" href="~/Content/img/icon.png"/>
+    <link rel="icon" href="~/Content/img/icon.png" />
 
     <title>Edunator</title>
 </head>
@@ -24,20 +24,36 @@
     <main>
         <br />
         <h3>Logged in as @Model.FirstName @Model.LastName</h3>
-        <br /><br />
-        <table class="w-75">
-            <tbody>
-                <tr>
-                    <td><a href="@Url.Action("MyProfile","Main")"><img class="menu_icon" src="~/Content/img/profile.png" /></a> <span class="my_stuff">My profile</span></td>
-                    <td><a href="@Url.Action("MyClass", "Main")"><img class="menu_icon" src="~/Content/img/class.png" /></a> <span class="my_stuff">My class</span></td>
-                </tr>
-                <tr>
-                    <td><a href="@Url.Action("MySubjects", "Main")"><img class="menu_icon" src="~/Content/img/subjects.png" /></a> <span class="my_stuff">My subjects</span></td>
-                    <td><a href="@Url.Action("MyGrades","Main")"><img class="menu_icon" src="~/Content/img/grade.png" /></a> <span class="my_stuff">My grades</span></td>
-                </tr>
-            </tbody>
-        </table>
+        <h1>@Model.Subject.Name</h1>
+
+
+        @foreach (Lesson lesson in Model.Lessons)
+        {
+            <section class="jumbotron">
+                <h1>@lesson.Topic</h1>
+                <h4>@lesson.Date</h4>
+                <hr />
+                <p>
+                    @lesson.Content
+                </p>
+                @if (lesson.LinkToImg != null)
+                {
+                    <p>Link to image: <a href="@lesson.LinkToImg">image</a></p>
+                }
+                @if (lesson.LinkToMovie != null)
+                {
+                    <p>Link to video: <a href="@lesson.LinkToMovie">video</a></p>
+                }
+                @if (lesson.LinkToExtras != null)
+                {
+                    <p>Link to extra materials: <a href="@lesson.LinkToExtras">extra</a></p>
+                }
+            </section>
+        }
+
         <br /><br /><br />
+        <a href="@Url.Action("BackToMain", "Main")" class="btn btn-outline-dark"><< Back</a>
+        <br /><br /><br/>
     </main>
 
     <footer>

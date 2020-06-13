@@ -384,5 +384,57 @@ namespace Edunator.Controllers
 
             return View("MyClass", mcvm);
         }
+
+        public ActionResult MySubjects()
+        {
+            Student student = Context.Students.Single(s => s.Email == Email);
+            _Class _class = Context._Classes.Single(c => c.Id == student._ClassId);
+            List<Subject> subjects = Context.Subjects.Where(s => s._ClassId == _class.Id).ToList();
+
+
+            MySubjectsViewModel msvm = new MySubjectsViewModel
+            {
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                Subjects = subjects
+            };
+
+            return View("MySubjects", msvm);
+
+        }
+
+        public ActionResult GoToLessons(int subjectId)
+        {
+            Student student = Context.Students.Single(s => s.Email == Email);
+            Subject subject = Context.Subjects.Single(s => s.Id == subjectId);
+
+            List<Lesson> lessons = Context.Lessons.Where(l => l.SubjectId == subject.Id).ToList();
+
+            AddLessonViewModel alvm = new AddLessonViewModel
+            {
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                Subject = subject,
+                Lessons = lessons
+            };
+
+            return View("GoToLessons", alvm);
+
+        }
+
+        public ActionResult MyGrades()
+        {
+            Student student = Context.Students.Single(s => s.Email == Email);
+            List<Grade> grades = Context.Grades.Where(g => g.StudentId == student.Id).ToList();
+
+            MyGradesViewModel mgvm = new MyGradesViewModel
+            {
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                Grades = grades
+            };
+
+            return View("MyGrades", mgvm);
+        }
     }
 }
