@@ -367,5 +367,22 @@ namespace Edunator.Controllers
 
             return View("AddLesson", alvm);
         }
+
+        public ActionResult MyClass()
+        {
+            Student student = Context.Students.Single(s => s.Email == Email);
+            List<Student> students = Context.Students.Where(s => s._ClassId == student._ClassId).ToList();
+            _Class _class = Context._Classes.Single(c => c.Id == student._ClassId);
+
+            MyClassViewModel mcvm = new MyClassViewModel
+            {
+                Students = students,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                ClassName = _class.Name
+            };
+
+            return View("MyClass", mcvm);
+        }
     }
 }

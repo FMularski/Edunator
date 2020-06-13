@@ -154,6 +154,7 @@
     <Compile Include="Models\ManageClassesViewModel.cs" />
     <Compile Include="Models\ManageLessonsViewModel.cs" />
     <Compile Include="Models\ManageSubjectsViewModel.cs" />
+    <Compile Include="Models\MyClassViewModel.cs" />
     <Compile Include="Models\MyProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs" />
@@ -218,6 +219,7 @@
     <Content Include="Views\Main\AddSubject.cshtml" />
     <Content Include="Views\Main\ManageLessons_Subjects.cshtml" />
     <Content Include="Views\Main\AddLesson.cshtml" />
+    <Content Include="Views\Main\MyClass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
